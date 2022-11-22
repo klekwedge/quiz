@@ -11,8 +11,13 @@ function QuizList() {
   const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
   const [rightAnswers, setRightAnswers] = useState(0);
   const [currentQuiz, setCurrentQuiz] = useState(0);
-  const [isGameOver, setIsGameOver] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const getQuizzes = () => {
+    getRandomQuizzes()
+      .then((data) => setQuizzes(data))
+      .catch((error) => console.log(error));
+  };
 
   const incRightAnswers = () => {
     setRightAnswers(rightAnswers + 1);
@@ -25,11 +30,15 @@ function QuizList() {
     }
   };
 
+  const restartGame = () => {
+    onClose();
+    getQuizzes();
+    setCurrentQuiz(0);
+    setRightAnswers(0);
+  };
 
   useEffect(() => {
-    getRandomQuizzes()
-      .then((data) => setQuizzes(data))
-      .catch((error) => console.log(error));
+    getQuizzes();
   }, []);
 
   return (
@@ -55,6 +64,7 @@ function QuizList() {
           isOpen={isOpen}
           onClose={onClose}
           rightAnswers={rightAnswers}
+          restartGame={restartGame}
         />
       )}
     </Flex>
