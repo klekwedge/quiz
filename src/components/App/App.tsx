@@ -3,7 +3,10 @@ import QuizList from "../QuizList/QuizList";
 
 function App() {
   return (
-    <Flex background="blue.200" alignItems="center" justifyContent="center">
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+    >
       <QuizList />
     </Flex>
   );

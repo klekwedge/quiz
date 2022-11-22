@@ -8,6 +8,17 @@ import QuizCard from "../QuizCard/QuizCard";
 function QuizList() {
   const { getRandomQuizzes } = QuizApi();
   const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
+  //   const [answers, setAnswers] = useState([]);
+  const [rightAnswers, setRightAnswers] = useState(0);
+  const [currentQuiz, setCurrentQuiz] = useState(0);
+
+  const incRightAnswers = () => {
+    setRightAnswers(rightAnswers + 1);
+  };
+
+  const incCurrentQuiz = () => {
+    setCurrentQuiz(currentQuiz + 1);
+  };
 
   useEffect(() => {
     getRandomQuizzes()
@@ -18,10 +29,20 @@ function QuizList() {
   console.log(quizzes);
 
   return (
-    <Flex p="10" flexDirection="column" alignItems="center" gap="20">
-      {quizzes.map((quizItem) => (
-        <QuizCard quiz={quizItem} key={uuidv4()} />
-      ))}
+    <Flex p="10" flexDirection="column" alignItems="center" gap="5">
+      {quizzes.length > 0 ? (
+        <>
+          <h2>Current quiz: {currentQuiz}</h2>
+          <QuizCard
+            quiz={quizzes[currentQuiz]}
+            key={uuidv4()}
+            incRightAnswers={incRightAnswers}
+            incCurrentQuiz={incCurrentQuiz}
+          />{" "}
+        </>
+      ) : (
+        ""
+      )}
     </Flex>
   );
 }

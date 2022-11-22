@@ -5,9 +5,11 @@ import { IQuiz } from "../../types/quiz.type";
 
 interface QuizCardProps {
   quiz: IQuiz;
+  incRightAnswers: () => void;
+  incCurrentQuiz: () => void;
 }
 
-function QuizCard({ quiz }: QuizCardProps) {
+function QuizCard({ quiz, incRightAnswers, incCurrentQuiz }: QuizCardProps) {
   const buttonClick = (e: BaseSyntheticEvent) => {
     if (quiz) {
       const answers = Object.entries(quiz.answers);
@@ -21,11 +23,12 @@ function QuizCard({ quiz }: QuizCardProps) {
             correctAnswer[0].includes(findEl[0]) &&
             correctAnswer[1] === "true"
           ) {
-            console.log("NICE!");
+            incRightAnswers();
           }
         }
       }
     }
+    incCurrentQuiz();
   };
 
   return (
@@ -56,6 +59,8 @@ function QuizCard({ quiz }: QuizCardProps) {
                   onClick={buttonClick}
                   datatype={"1"}
                   colorScheme="teal"
+                  w="100%"
+                  borderRadius="20"
                 >
                   {item[1]}
                 </Button>
