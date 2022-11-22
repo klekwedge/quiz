@@ -17,7 +17,9 @@ function QuizList() {
   };
 
   const incCurrentQuiz = () => {
-    setCurrentQuiz(currentQuiz + 1);
+    if (currentQuiz < 19) {
+      setCurrentQuiz(currentQuiz + 1);
+    }
   };
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function QuizList() {
     <Flex p="10" flexDirection="column" alignItems="center" gap="5">
       {quizzes.length > 0 ? (
         <>
-          <h2>Current quiz: {currentQuiz}</h2>
+          <h2>Current quiz: {currentQuiz + 1}</h2>
           <QuizCard
             quiz={quizzes[currentQuiz]}
             key={uuidv4()}
