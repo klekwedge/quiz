@@ -1,6 +1,7 @@
 import { Button, Flex, Heading } from "@chakra-ui/react";
 import { BaseSyntheticEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
+import useCorrectAnswer from "../../hooks/useCorrectAnswer";
 import { IQuiz } from "../../types/quiz.type";
 
 interface QuizCardProps {
@@ -12,20 +13,14 @@ interface QuizCardProps {
 function QuizCard({ quiz, incRightAnswers, incCurrentQuiz }: QuizCardProps) {
   const buttonClick = (e: BaseSyntheticEvent) => {
     if (quiz) {
-      const answers = Object.entries(quiz.answers);
-      const correctAnswers = Object.entries(quiz.correct_answers);
-      const findEl = answers.find((item) => item[1] === e.target.innerText);
+      const isCorrectAnswer = useCorrectAnswer(
+        quiz.answers,
+        quiz.correct_answers,
+        e.target.innerText
+      );
 
-      if (findEl) {
-        for (const key in correctAnswers) {
-          const correctAnswer = correctAnswers[key];
-          if (
-            correctAnswer[0].includes(findEl[0]) &&
-            correctAnswer[1] === "true"
-          ) {
-            incRightAnswers();
-          }
-        }
+      if (isCorrectAnswer) {
+        incRightAnswers();
       }
     }
     incCurrentQuiz();
