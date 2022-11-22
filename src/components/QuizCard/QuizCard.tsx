@@ -8,14 +8,14 @@ interface QuizCardProps {
   quiz: IQuiz;
   incRightAnswers: () => void;
   incCurrentQuiz: () => void;
-  pushRightAnswersArr: (rightAnswer: string) => void;
+  pushAnswer: (answer: string) => void;
 }
 
 function QuizCard({
   quiz,
   incRightAnswers,
   incCurrentQuiz,
-  pushRightAnswersArr,
+  pushAnswer,
 }: QuizCardProps) {
   const nextQuestion = (e: BaseSyntheticEvent) => {
     if (quiz) {
@@ -27,10 +27,10 @@ function QuizCard({
 
       if (isCorrect) {
         incRightAnswers();
-        pushRightAnswersArr(answer);
       }
+      pushAnswer(answer);
+      incCurrentQuiz();
     }
-    incCurrentQuiz();
   };
 
   return (

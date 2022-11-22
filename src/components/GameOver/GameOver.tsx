@@ -1,26 +1,42 @@
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading, Tag } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
+import useCorrectAnswer from "../../hooks/useCorrectAnswer";
 import { IQuiz } from "../../types/quiz.type";
 
 interface GameOverProps {
   rightAnswers: number;
   restartGame: () => void;
-  rightAnswersArr: string[];
+  answers: string[];
   quizzes: IQuiz[];
 }
 
 function GameOver({
   rightAnswers,
   restartGame,
-  rightAnswersArr,
+  answers,
   quizzes,
 }: GameOverProps) {
+  const isCorrect = (quiz: IQuiz, currentAnswer: string[], index: number) => {
+    const { isCorrect, answer } = useCorrectAnswer(
+      quiz.answers,
+      quiz.correct_answers,
+      currentAnswer[1]
+    );
+
+
+    if (answers[index] === answer) {
+      return isCorrect ? "green" : "red";
+    }
+
+    return isCorrect ? "green" : "";
+  };
+
   return (
     <Flex flexDirection="column">
       <Button colorScheme="blue" mr={3} onClick={restartGame}>
         Restart
       </Button>
-      {quizzes.map((quiz) => (
+      {quizzes.map((quiz, index) => (
         <Flex
           key={uuidv4()}
           border="1px solid black"
@@ -43,14 +59,15 @@ function GameOver({
             >
               {Object.entries(quiz.answers).map((item) =>
                 item[1] !== null ? (
-                  <Button
+                  <Tag
                     key={uuidv4()}
-                    colorScheme="teal"
+                    textAlign="center"
                     w="100%"
                     borderRadius="20"
+                    colorScheme={isCorrect(quiz, item, index)}
                   >
                     {item[1]}
-                  </Button>
+                  </Tag>
                 ) : (
                   ""
                 )

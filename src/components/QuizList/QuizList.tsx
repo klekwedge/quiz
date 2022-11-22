@@ -12,7 +12,7 @@ function QuizList() {
   const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const [rightAnswers, setRightAnswers] = useState(0);
-  const [rightAnswersArr, setRightAnswersArr] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);
   const [currentQuiz, setCurrentQuiz] = useState(0);
 
   const getQuizzes = () => {
@@ -21,8 +21,8 @@ function QuizList() {
       .catch((error) => console.log(error));
   };
 
-  const pushRightAnswersArr = (rightAnswer: string) => {
-    setRightAnswersArr([...rightAnswersArr, rightAnswer]);
+  const pushAnswer = (answer: string) => {
+    setAnswers([...answers, answer]);
   };
 
   const incRightAnswers = () => {
@@ -30,20 +30,17 @@ function QuizList() {
   };
 
   const incCurrentQuiz = () => {
-    console.log(currentQuiz);
     if (currentQuiz === quizzes.length - 1) {
       setIsGameOver(true);
     }
     setCurrentQuiz(currentQuiz + 1);
   };
 
-  console.log(isGameOver);
-
   const restartGame = () => {
     getQuizzes();
     setCurrentQuiz(0);
     setRightAnswers(0);
-    setRightAnswersArr([]);
+    setAnswers([]);
     setIsGameOver(false);
   };
 
@@ -61,7 +58,7 @@ function QuizList() {
             key={uuidv4()}
             incRightAnswers={incRightAnswers}
             incCurrentQuiz={incCurrentQuiz}
-            pushRightAnswersArr={pushRightAnswersArr}
+            pushAnswer={pushAnswer}
           />
         </>
       ) : (
@@ -72,7 +69,7 @@ function QuizList() {
         <GameOver
           rightAnswers={rightAnswers}
           restartGame={restartGame}
-          rightAnswersArr={rightAnswersArr}
+          answers={answers}
           quizzes={quizzes}
         />
       ) : (
