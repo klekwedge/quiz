@@ -14,10 +14,9 @@ function QuizList() {
   const [rightAnswers, setRightAnswers] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [currentQuiz, setCurrentQuiz] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getQuizzes = () => {
-    setLoading(true);
     getRandomQuizzes()
       .then((data) => setQuizzes(data))
       .catch((error) => console.log(error));
@@ -40,7 +39,8 @@ function QuizList() {
   };
 
   const restartGame = () => {
-    
+    setQuizzes([])
+    setLoading(true);
     getQuizzes();
     setCurrentQuiz(0);
     setRightAnswers(0);
@@ -49,12 +49,13 @@ function QuizList() {
   };
 
   useEffect(() => {
+    setLoading(true);
     getQuizzes();
   }, []);
 
   if (loading) {
     return (
-      <Flex flexDirection="column" alignItems="center">
+      <Flex flexDirection="column" alignItems="center" pt="100">
         <Spinner />
       </Flex>
     );
