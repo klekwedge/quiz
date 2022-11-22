@@ -1,5 +1,5 @@
 import { Button, Flex, Heading } from "@chakra-ui/react";
-import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { BaseSyntheticEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { IQuiz } from "../../types/quiz.type";
 
@@ -34,21 +34,29 @@ function QuizCard({ quiz }: QuizCardProps) {
       p="10"
       flexDirection="column"
       alignItems="center"
+      borderRadius="10px"
+      background="white"
     >
       {quiz ? (
         <>
-          <Heading as="h2" mb="5">
+          <Heading as="h2" mb="5" textAlign="center">
             {quiz.question}
           </Heading>
           <Flex
             justifyContent="center"
             alignItems="center"
-            gap="10"
+            gap="3"
             wrap="wrap"
+            flexDirection="column"
           >
             {Object.entries(quiz.answers).map((item) =>
               item[1] !== null ? (
-                <Button key={uuidv4()} onClick={buttonClick} datatype={"1"}>
+                <Button
+                  key={uuidv4()}
+                  onClick={buttonClick}
+                  datatype={"1"}
+                  colorScheme="teal"
+                >
                   {item[1]}
                 </Button>
               ) : (

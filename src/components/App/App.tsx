@@ -1,11 +1,11 @@
+import { Flex } from "@chakra-ui/react";
 import QuizList from "../QuizList/QuizList";
-import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <Flex background="blue.200" alignItems="center" justifyContent="center">
       <QuizList />
-    </div>
+    </Flex>
   );
 }
 
