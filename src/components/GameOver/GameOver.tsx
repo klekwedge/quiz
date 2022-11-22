@@ -32,7 +32,10 @@ function GameOver({
 
   return (
     <Flex flexDirection="column" alignItems="center">
-      <Button colorScheme="blue" mb="15" onClick={restartGame} maxW="200">
+      <Heading mb='20px'>
+        Your score: {rightAnswers} / {quizzes.length}
+      </Heading>
+      <Button colorScheme="blue" mb="20px" onClick={restartGame} maxW="200">
         Restart
       </Button>
       {quizzes.map((quiz, index) => (
