@@ -23,7 +23,6 @@ function GameOver({
       currentAnswer[1]
     );
 
-
     if (answers[index] === answer) {
       return isCorrect ? "green" : "red";
     }
@@ -32,8 +31,8 @@ function GameOver({
   };
 
   return (
-    <Flex flexDirection="column">
-      <Button colorScheme="blue" mr={3} onClick={restartGame}>
+    <Flex flexDirection="column" alignItems="center">
+      <Button colorScheme="blue" mb="15" onClick={restartGame} maxW="200">
         Restart
       </Button>
       {quizzes.map((quiz, index) => (

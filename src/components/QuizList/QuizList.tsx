@@ -1,4 +1,4 @@
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import QuizApi from "../../services/QuizApi";
@@ -14,9 +14,10 @@ function QuizList() {
   const [rightAnswers, setRightAnswers] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [currentQuiz, setCurrentQuiz] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const getQuizzes = () => {
+    setLoading(true);
     getRandomQuizzes()
       .then((data) => setQuizzes(data))
       .catch((error) => console.log(error));
@@ -39,7 +40,7 @@ function QuizList() {
   };
 
   const restartGame = () => {
-    setLoading(true);
+    
     getQuizzes();
     setCurrentQuiz(0);
     setRightAnswers(0);
@@ -52,7 +53,6 @@ function QuizList() {
   }, []);
 
   if (loading) {
-    console.log('!');
     return (
       <Flex flexDirection="column" alignItems="center">
         <Spinner />
