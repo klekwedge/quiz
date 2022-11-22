@@ -16,11 +16,17 @@ const useCorrectAnswer = (
         correctAnswer[0].includes(quizSelectedAnswer[0]) &&
         correctAnswer[1] === "true"
       ) {
-        return true;
+        return {
+          isCorrect: true,
+          answer: selectedAnswer,
+        };
       }
     }
   }
-  return false;
+  return {
+    isCorrect: false,
+    answer: selectedAnswer,
+  };
 };
 
 export default useCorrectAnswer;

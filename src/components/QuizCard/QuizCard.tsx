@@ -8,19 +8,26 @@ interface QuizCardProps {
   quiz: IQuiz;
   incRightAnswers: () => void;
   incCurrentQuiz: () => void;
+  pushRightAnswersArr: (rightAnswer: string) => void;
 }
 
-function QuizCard({ quiz, incRightAnswers, incCurrentQuiz }: QuizCardProps) {
-  const buttonClick = (e: BaseSyntheticEvent) => {
+function QuizCard({
+  quiz,
+  incRightAnswers,
+  incCurrentQuiz,
+  pushRightAnswersArr,
+}: QuizCardProps) {
+  const nextQuestion = (e: BaseSyntheticEvent) => {
     if (quiz) {
-      const isCorrectAnswer = useCorrectAnswer(
+      const { isCorrect, answer } = useCorrectAnswer(
         quiz.answers,
         quiz.correct_answers,
         e.target.innerText
       );
 
-      if (isCorrectAnswer) {
+      if (isCorrect) {
         incRightAnswers();
+        pushRightAnswersArr(answer);
       }
     }
     incCurrentQuiz();
@@ -51,8 +58,7 @@ function QuizCard({ quiz, incRightAnswers, incCurrentQuiz }: QuizCardProps) {
               item[1] !== null ? (
                 <Button
                   key={uuidv4()}
-                  onClick={buttonClick}
-                  datatype={"1"}
+                  onClick={nextQuestion}
                   colorScheme="teal"
                   w="100%"
                   borderRadius="20"

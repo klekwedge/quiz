@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import QuizApi from "../../services/QuizApi";
 import { IQuiz } from "../../types/quiz.type";
-import ModalResult from "../ModalResult/ModalResult";
+import GameOver from "../GameOver/GameOver";
+import ModalResult from "../GameOver/GameOver";
 import QuizCard from "../QuizCard/QuizCard";
 
 function QuizList() {
   const { getRandomQuizzes } = QuizApi();
   const [quizzes, setQuizzes] = useState<IQuiz[]>([]);
+  const [isGameOver, setIsGameOver] = useState(false);
   const [rightAnswers, setRightAnswers] = useState(0);
+  const [rightAnswersArr, setRightAnswersArr] = useState<string[]>([]);
   const [currentQuiz, setCurrentQuiz] = useState(0);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getQuizzes = () => {
     getRandomQuizzes()
@@ -19,22 +21,30 @@ function QuizList() {
       .catch((error) => console.log(error));
   };
 
+  const pushRightAnswersArr = (rightAnswer: string) => {
+    setRightAnswersArr([...rightAnswersArr, rightAnswer]);
+  };
+
   const incRightAnswers = () => {
     setRightAnswers(rightAnswers + 1);
   };
 
   const incCurrentQuiz = () => {
-    setCurrentQuiz(currentQuiz + 1);
-    if (currentQuiz < 19) {
-      onOpen();
+    console.log(currentQuiz);
+    if (currentQuiz === quizzes.length - 1) {
+      setIsGameOver(true);
     }
+    setCurrentQuiz(currentQuiz + 1);
   };
 
+  console.log(isGameOver);
+
   const restartGame = () => {
-    onClose();
     getQuizzes();
     setCurrentQuiz(0);
     setRightAnswers(0);
+    setRightAnswersArr([]);
+    setIsGameOver(false);
   };
 
   useEffect(() => {
@@ -51,21 +61,22 @@ function QuizList() {
             key={uuidv4()}
             incRightAnswers={incRightAnswers}
             incCurrentQuiz={incCurrentQuiz}
+            pushRightAnswersArr={pushRightAnswersArr}
           />
         </>
       ) : (
         ""
       )}
 
-      {currentQuiz < quizzes.length ? (
-        ""
-      ) : (
-        <ModalResult
-          isOpen={isOpen}
-          onClose={onClose}
+      {isGameOver ? (
+        <GameOver
           rightAnswers={rightAnswers}
           restartGame={restartGame}
+          rightAnswersArr={rightAnswersArr}
+          quizzes={quizzes}
         />
+      ) : (
+        ""
       )}
     </Flex>
   );
