@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import QuizApi from "../../services/QuizApi";
 import { IQuiz } from "../../types/quiz.type";
 import GameOver from "../GameOver/GameOver";
-import ModalResult from "../GameOver/GameOver";
 import QuizCard from "../QuizCard/QuizCard";
+import Spinner from "../Spinner/Spinner";
 
 function QuizList() {
   const { getRandomQuizzes } = QuizApi();
@@ -14,11 +14,13 @@ function QuizList() {
   const [rightAnswers, setRightAnswers] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [currentQuiz, setCurrentQuiz] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const getQuizzes = () => {
     getRandomQuizzes()
       .then((data) => setQuizzes(data))
       .catch((error) => console.log(error));
+    setLoading(false);
   };
 
   const pushAnswer = (answer: string) => {
@@ -37,6 +39,7 @@ function QuizList() {
   };
 
   const restartGame = () => {
+    setLoading(true);
     getQuizzes();
     setCurrentQuiz(0);
     setRightAnswers(0);
@@ -47,6 +50,15 @@ function QuizList() {
   useEffect(() => {
     getQuizzes();
   }, []);
+
+  if (loading) {
+    console.log('!');
+    return (
+      <Flex flexDirection="column" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
 
   return (
     <Flex p="10" flexDirection="column" alignItems="center" gap="5">
