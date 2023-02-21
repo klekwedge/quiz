@@ -65,7 +65,7 @@ function QuizList() {
     <Flex p="10" flexDirection="column" alignItems="center" gap="5">
       {quizzes.length > 0 && currentQuiz < quizzes.length ? (
         <>
-          <h2>Current quiz: {currentQuiz + 1}</h2>
+          <h2>Current issue number: {currentQuiz + 1}</h2>
           <QuizCard
             quiz={quizzes[currentQuiz]}
             key={uuidv4()}

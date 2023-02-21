@@ -41,10 +41,18 @@ function QuizCard({
       alignItems="center"
       borderRadius="10px"
       background="white"
+      maxW="600px"
+      w="100%"
     >
       {quiz ? (
         <>
-          <Heading as="h2" mb="5" textAlign="center">
+          <Heading
+            as="h2"
+            fontWeight="600"
+            fontSize="30px"
+            mb="5"
+            textAlign="center"
+          >
             {quiz.question}
           </Heading>
           <Flex
@@ -56,15 +64,26 @@ function QuizCard({
           >
             {Object.entries(quiz.answers).map((item) =>
               item[1] !== null ? (
-                <Button
+                <Heading
+                  as="h2"
+                  cursor="pointer"
+                  transition="all 0.5s ease"
+                  _hover={{
+                    background: "teal.600",
+                  }}
+                  fontWeight="500"
+                  fontSize="25px"
                   key={uuidv4()}
+                  textAlign="center"
                   onClick={nextQuestion}
-                  colorScheme="teal"
+                  background="teal.400"
+                  color="white"
+                  p="10px"
                   w="100%"
                   borderRadius="20"
                 >
                   {item[1]}
-                </Button>
+                </Heading>
               ) : (
                 ""
               )

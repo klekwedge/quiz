@@ -32,30 +32,42 @@ function GameOver({
 
   return (
     <Flex flexDirection="column" alignItems="center">
-      <Heading mb='20px'>
+      <Heading mb="20px" fontSize="35px">
         Your score: {rightAnswers} / {quizzes.length}
       </Heading>
       <Button colorScheme="blue" mb="20px" onClick={restartGame} maxW="200">
         Restart
       </Button>
-      {quizzes.map((quiz, index) => (
-        <Flex
-          key={uuidv4()}
-          border="1px solid black"
-          p="10"
-          flexDirection="column"
-          alignItems="center"
-          borderRadius="10px"
-          background="white"
-        >
-          <Flex flexDirection="column">
-            <Heading as="h2" mb="5" textAlign="center">
+      <Flex
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        gap="30px"
+      >
+        {quizzes.map((quiz, index) => (
+          <Flex
+            maxW="600px"
+            w="100%"
+            key={uuidv4()}
+            border="1px solid black"
+            p="10px"
+            flexDirection="column"
+            alignItems="center"
+            borderRadius="10px"
+          >
+            <Heading
+              as="h2"
+              fontSize="25px"
+              fontWeight="600"
+              mb="5"
+              textAlign="center"
+            >
               {quiz.question}
             </Heading>
             <Flex
               justifyContent="center"
               alignItems="center"
-              gap="3"
+              gap="5px"
               wrap="wrap"
               flexDirection="column"
             >
@@ -76,8 +88,8 @@ function GameOver({
               )}
             </Flex>
           </Flex>
-        </Flex>
-      ))}
+        ))}
+      </Flex>
     </Flex>
   );
 }
