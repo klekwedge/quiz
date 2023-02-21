@@ -35,7 +35,7 @@ function GameOver({
       <Heading mb="20px" fontSize="35px">
         Your score: {rightAnswers} / {quizzes.length}
       </Heading>
-      <Button colorScheme="blue" mb="20px" onClick={restartGame} maxW="200">
+      <Button colorScheme="blue" mb="20px" onClick={restartGame}>
         Restart
       </Button>
       <Flex

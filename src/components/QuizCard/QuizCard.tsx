@@ -36,7 +36,7 @@ function QuizCard({
   return (
     <Flex
       border="1px solid black"
-      p="10"
+      p="20px 10px"
       flexDirection="column"
       alignItems="center"
       borderRadius="10px"

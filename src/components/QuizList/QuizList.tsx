@@ -53,16 +53,18 @@ function QuizList() {
     getQuizzes();
   }, []);
 
+  console.log(loading);
+
   if (loading) {
     return (
-      <Flex flexDirection="column" alignItems="center" pt="100">
+      <Flex flexDirection="column" alignItems="center" pt="100px">
         <Spinner />
       </Flex>
     );
   }
 
   return (
-    <Flex p="10" flexDirection="column" alignItems="center" gap="5">
+    <Flex p="50px 10px" flexDirection="column" alignItems="center" gap="10px">
       {quizzes.length > 0 && currentQuiz < quizzes.length ? (
         <>
           <Heading as="h2" fontWeight="400" fontSize="20px">
