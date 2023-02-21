@@ -54,12 +54,13 @@ function GameOver({
             flexDirection="column"
             alignItems="center"
             borderRadius="10px"
+            tabIndex={0}
           >
             <Heading
               as="h2"
-              fontSize="25px"
+              fontSize="30px"
               fontWeight="600"
-              mb="5"
+              mb="20px"
               textAlign="center"
             >
               {quiz.question}
@@ -67,17 +68,19 @@ function GameOver({
             <Flex
               justifyContent="center"
               alignItems="center"
-              gap="5px"
-              wrap="wrap"
+              gap="15px"
+              flexWrap="wrap"
               flexDirection="column"
             >
               {Object.entries(quiz.answers).map((item) =>
                 item[1] !== null ? (
                   <Tag
                     key={uuidv4()}
+                    display="inline-block"
                     textAlign="center"
                     w="100%"
-                    borderRadius="20"
+                    fontSize="20px"
+                    borderRadius="20px"
                     colorScheme={isCorrect(quiz, item, index)}
                   >
                     {item[1]}

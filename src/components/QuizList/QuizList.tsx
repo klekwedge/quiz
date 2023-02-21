@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import QuizApi from "../../services/QuizApi";
@@ -39,7 +39,7 @@ function QuizList() {
   };
 
   const restartGame = () => {
-    setQuizzes([])
+    setQuizzes([]);
     setLoading(true);
     getQuizzes();
     setCurrentQuiz(0);
@@ -65,7 +65,9 @@ function QuizList() {
     <Flex p="10" flexDirection="column" alignItems="center" gap="5">
       {quizzes.length > 0 && currentQuiz < quizzes.length ? (
         <>
-          <h2>Current issue number: {currentQuiz + 1}</h2>
+          <Heading as="h2" fontWeight="400" fontSize="20px">
+            Current issue number: {currentQuiz + 1}
+          </Heading>
           <QuizCard
             quiz={quizzes[currentQuiz]}
             key={uuidv4()}

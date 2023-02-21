@@ -56,34 +56,36 @@ function QuizCard({
             {quiz.question}
           </Heading>
           <Flex
-            justifyContent="center"
-            alignItems="center"
-            gap="3"
+            // justifyContent="center"
+            // alignItems="center"
+            gap="10px"
             wrap="wrap"
             flexDirection="column"
           >
             {Object.entries(quiz.answers).map((item) =>
               item[1] !== null ? (
-                <Heading
-                  as="h2"
-                  cursor="pointer"
+                <Button
+                  whiteSpace="normal"
                   transition="all 0.5s ease"
                   _hover={{
                     background: "teal.600",
                   }}
+                  _focus={{
+                    background: "teal.600",
+                  }}
                   fontWeight="500"
-                  fontSize="25px"
                   key={uuidv4()}
                   textAlign="center"
                   onClick={nextQuestion}
                   background="teal.400"
+                  fontSize='20px'
                   color="white"
                   p="10px"
-                  w="100%"
-                  borderRadius="20"
+                  borderRadius="20px"
+                  h='100%'
                 >
-                  {item[1]}
-                </Heading>
+                  {`${item[1]}`}
+                </Button>
               ) : (
                 ""
               )
