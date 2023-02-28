@@ -30,7 +30,7 @@
 ### Ссылки
 
 - [Ссылка на проект](https://github.com/klekwedge/quiz)
-- [Деплой](klekwedge-quiz.vercel.app)
+- [Деплой](https://klekwedge-quiz.vercel.app/)
 
 ## Мой процесс
 
