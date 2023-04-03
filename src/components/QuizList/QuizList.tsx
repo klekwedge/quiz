@@ -53,8 +53,6 @@ function QuizList() {
     getQuizzes();
   }, []);
 
-  console.log(loading);
-
   if (loading) {
     return (
       <Flex flexDirection="column" alignItems="center" pt="100px">

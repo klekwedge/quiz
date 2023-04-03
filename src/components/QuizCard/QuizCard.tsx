@@ -56,8 +56,6 @@ function QuizCard({
             {quiz.question}
           </Heading>
           <Flex
-            // justifyContent="center"
-            // alignItems="center"
             gap="10px"
             wrap="wrap"
             flexDirection="column"

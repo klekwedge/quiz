@@ -16,7 +16,7 @@ function GameOver({
   answers,
   quizzes,
 }: GameOverProps) {
-  const isCorrect = (quiz: IQuiz, currentAnswer: string[], index: number) => {
+  const checkCorrect = (quiz: IQuiz, currentAnswer: string[], index: number) => {
     const { isCorrect, answer } = useCorrectAnswer(
       quiz.answers,
       quiz.correct_answers,
@@ -81,7 +81,7 @@ function GameOver({
                     w="100%"
                     fontSize="20px"
                     borderRadius="20px"
-                    colorScheme={isCorrect(quiz, item, index)}
+                    colorScheme={checkCorrect(quiz, item, index)}
                   >
                     {item[1]}
                   </Tag>
