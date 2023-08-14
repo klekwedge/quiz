@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import { Button, Card, CardBody, Flex, Heading, Stack } from '@chakra-ui/react';
 import { BaseSyntheticEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useCorrectAnswer from '../../hooks/useCorrectAnswer';
@@ -36,7 +36,6 @@ function QuizCard({ quiz, incRightAnswers, incCurrentQuiz, pushAnswer }: QuizCar
       <CardBody>
         <Stack mt="6" spacing="3">
           <Heading as="h2" size="md">
-            {' '}
             {quiz.question}
           </Heading>
           <Flex gap="15px" wrap="wrap" flexDirection="column">
@@ -64,7 +63,6 @@ function QuizCard({ quiz, incRightAnswers, incCurrentQuiz, pushAnswer }: QuizCar
           </Flex>
         </Stack>
       </CardBody>
-      <Divider />
     </Card>
   );
 }
