@@ -29,36 +29,32 @@ function QuizCard({ quiz, incRightAnswers, incCurrentQuiz, pushAnswer }: QuizCar
   }
 
   return (
-    <Card
-      maxW="550px"
-      w="100%"
-    >
+    <Card maxW="550px" w="100%">
       <CardBody>
         <Stack mt="6" spacing="3">
           <Heading as="h2" size="md">
             {quiz.question}
           </Heading>
           <Flex gap="15px" wrap="wrap" flexDirection="column">
-            {Object.entries(quiz.answers).map((item) =>
-              item[1] !== null ? (
-                <Button
-                  colorScheme="blue"
-                  whiteSpace="normal"
-                  transition="all 0.5s ease"
-                  fontWeight="500"
-                  key={uuidv4()}
-                  textAlign="center"
-                  onClick={nextQuestion}
-                  fontSize="20px"
-                  p="5px 10px"
-                  borderRadius="20px"
-                  h="100%"
-                >
-                  {`${item[1]}`}
-                </Button>
-              ) : (
-                ''
-              ),
+            {Object.entries(quiz.answers).map(
+              (item) =>
+                item[1] !== null && (
+                  <Button
+                    colorScheme="blue"
+                    whiteSpace="normal"
+                    transition="all 0.5s ease"
+                    fontWeight="500"
+                    key={uuidv4()}
+                    textAlign="center"
+                    onClick={nextQuestion}
+                    fontSize="20px"
+                    p="5px 10px"
+                    borderRadius="20px"
+                    h="100%"
+                  >
+                    {`${item[1]}`}
+                  </Button>
+                ),
             )}
           </Flex>
         </Stack>

@@ -1,11 +1,11 @@
-import { Flex, Heading } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import QuizApi from "../../services/QuizApi";
-import { IQuiz } from "../../types/quiz.type";
-import GameOver from "../GameOver/GameOver";
-import QuizCard from "../QuizCard/QuizCard";
-import Spinner from "../Spinner/Spinner";
+import { Flex, Heading } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import QuizApi from '../../services/QuizApi';
+import { IQuiz } from '../../types/quiz.type';
+import GameOver from '../GameOver/GameOver';
+import QuizCard from '../QuizCard/QuizCard';
+import Spinner from '../Spinner/Spinner';
 
 function QuizList() {
   const { getRandomQuizzes } = QuizApi();
@@ -63,7 +63,7 @@ function QuizList() {
 
   return (
     <Flex p="50px 10px" flexDirection="column" alignItems="center" gap="10px">
-      {quizzes.length > 0 && currentQuiz < quizzes.length ? (
+      {quizzes.length > 0 && currentQuiz < quizzes.length && (
         <>
           <Heading as="h2" fontWeight="400" fontSize="20px">
             Current issue number: {currentQuiz + 1}
@@ -76,19 +76,10 @@ function QuizList() {
             pushAnswer={pushAnswer}
           />
         </>
-      ) : (
-        ""
       )}
 
-      {isGameOver ? (
-        <GameOver
-          rightAnswers={rightAnswers}
-          restartGame={restartGame}
-          answers={answers}
-          quizzes={quizzes}
-        />
-      ) : (
-        ""
+      {isGameOver && (
+        <GameOver rightAnswers={rightAnswers} restartGame={restartGame} answers={answers} quizzes={quizzes} />
       )}
     </Flex>
   );
